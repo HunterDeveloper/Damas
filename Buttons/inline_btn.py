@@ -4,12 +4,18 @@ categories=InlineKeyboardMarkup( [
     [ InlineKeyboardButton('Ressor ustanovka:50 000', callback_data='resor'),InlineKeyboardButton('Gaz regr:40 000', callback_data='gaz_regr')],
 ])
 master_categories=InlineKeyboardMarkup( [ 
-    [ InlineKeyboardButton(f'Klapn tortish:', callback_data='klapn'),InlineKeyboardButton('Gaz legirofka:10 000', callback_data='gaz')],
-    [ InlineKeyboardButton('Ressor ustanovka:50 000', callback_data='resor'),InlineKeyboardButton('Gaz regr:40 000', callback_data='gaz_regr')],
+    [ InlineKeyboardButton(f'Klapn tortish:', callback_data='klapn'),InlineKeyboardButton('Gaz legirofka', callback_data='gaz')],
+    [ InlineKeyboardButton('Ressor ustanovka:', callback_data='resor'),InlineKeyboardButton('Gaz regr:', callback_data='gaz_regr')]
+])
+
+admin_categories=InlineKeyboardMarkup( [ 
+    [ InlineKeyboardButton(f'Klapn tortish:', callback_data='klapn'),InlineKeyboardButton('Gaz legirofka', callback_data='gaz')],
+    [ InlineKeyboardButton('Ressor ustanovka:', callback_data='resor'),InlineKeyboardButton('Gaz regr:', callback_data='gaz_regr')],
+    [ InlineKeyboardButton('Ha,mma foydalanuvchilar.', callback_data='all')]
 ])
 
 admin_btn=InlineKeyboardMarkup( [ 
-    [ InlineKeyboardButton("📤 Xabar jo'natish", callback_data='send_message'),InlineKeyboardButton("📜 Sonini ko'rish", callback_data='show_users')]]
+    [ InlineKeyboardButton("📤 Xabar jo'natish", callback_data='send_message'),InlineKeyboardButton("📜 Xisobot", callback_data='xisobot')]]
 )
 number_users=InlineKeyboardMarkup( [ 
     [InlineKeyboardButton("Umumiz soni", callback_data="all")],

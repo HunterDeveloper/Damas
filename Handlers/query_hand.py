@@ -17,12 +17,12 @@ def ans_admin(update, context):
         context.bot.send_message(id, "Yubormoqchi bo'lgan xabaringizni yozing")
         return STATE_SEND
 
-    elif query.data=="show_users":
-        context.bot.send_message(id, "Qaysi kategoriyadagi ma'lumotlarni ko'rmoqchisiz.", reply_markup=number_users)
+    elif query.data=="xisobot":
+        context.bot.send_message(id, "Qaysi kategoriyadagi ma'lumotlarni ko'rmoqchisiz.", reply_markup=admin_categories)
     elif query.data=="all":
         context.bot.send_message(id, f"Umumiy foydalanuvchilar soni: {db.get_count_users()}")
     else:
-        context.bot.send_message(id, f"Tanlagan kategoriyangizda mahsulotlar soni {db.get_count_category(query.data)}")
+        context.bot.send_message(id, f"Tanlagan kategoriyangizda bugungi tushgan  zakazlar soni {db.get_count_category(query.data)} \n Bajarilgan: {db.get_ready_category(query.data)}\n")
         
 
 def master_category_ansv(update, context):

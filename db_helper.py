@@ -83,7 +83,14 @@ class DBUser:
         return self.db_exequite(sql, fetchone=True)[0]
     
     def get_count_category(self, name):
-        sql = f""" SELECT COUNT(name) FROM Product WHERE name="{name}" """
+        today=str(time.ctime())[:10]
+        sql = f""" SELECT COUNT(name) FROM Zakaz WHERE time like "{today}%" and name="{name}" """
+        return self.db_exequite(sql, fetchone=True)[0]
+    
+    
+    def get_ready_category(self, name):
+        today=str(time.ctime())[:10]
+        sql = f""" SELECT COUNT(name) FROM Zakaz WHERE time like "{today}%"and  name="{name}"and not master=0 """
         return self.db_exequite(sql, fetchone=True)[0]
 
     def clean(self):
