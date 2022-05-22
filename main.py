@@ -32,12 +32,12 @@ def main():
                 MessageHandler(Filters.location, send_location)
             ],
             STATE_ADMIN: [ 
-                MessageHandler(Filters.text, master_add),
-                CallbackQueryHandler(ans_admin),
                 CommandHandler('start', start),
                 CommandHandler('aftor', aftor),
                 CommandHandler("clean",clean),
                 CommandHandler("add",add_master),
+                MessageHandler(Filters.text, master_add),
+                CallbackQueryHandler(ans_admin),
             ],
             STATE_SEND: [ 
                 CommandHandler('start', start),

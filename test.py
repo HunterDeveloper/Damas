@@ -1,2 +1,3 @@
-import time
-print(str(time.asctime())[:10])
+from datetime import  datetime, timedelta
+time=str(datetime.now()+timedelta(hours=-5))[:-7]
+print(time)

@@ -10,8 +10,24 @@ def send_location(update, context):
     if db.check_zakaz(db.get_position(id),id):
         adress=str(update.message.location.longitude)+" "+str(update.message.location.latitude)
         print(adress)
-        db.add_zakaz(db.get_position(id),id,str(time.ctime()),adress)
+        db.add_zakaz(db.get_position(id),id,adress)
         context.bot.send_message(id,"Sizning buyurtmangiz qabul qilindi.Tez orada javob olasiz.", reply_markup=ReplyKeyboardRemove(True))
+
+        ############################### Masterlarga zakaz haqida xabar yuboradi. #####################
+        users=db.get_all_users()
+        message_id=update.message.message_id
+        j=0
+        for i in users:
+            try:
+                if db.get_degree(i[0])=='master':
+                    context.bot.send_message(i[0], "ZYangi buyurtma keldi. /startni bosib tekshirib ko'ring.")
+                j+=1
+                if j==30:
+                    time.sleep(1)
+                    j=0
+            except Exception as e:
+                context.bot.send_message(ADMIN, f"Xabar yuborishda xatolik. {e}\n{i[0]}")
+                continue
     else:
         context.bot.send_message(id,"Sizning buyurtmangiz qabul qilingan!")
 

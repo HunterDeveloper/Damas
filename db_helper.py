@@ -1,5 +1,5 @@
 import sqlite3
-import time
+from datetime import  datetime, timedelta
 class DBUser:
     def __init__(self, db_name):
         self.conn=sqlite3.connect(db_name, check_same_thread=False)
@@ -83,13 +83,13 @@ class DBUser:
         return self.db_exequite(sql, fetchone=True)[0]
     
     def get_count_category(self, name):
-        today=str(time.ctime())[:10]
+        today=str(datetime.now()+timedelta(hours=5))[:10]
         sql = f""" SELECT COUNT(name) FROM Zakaz WHERE time like "{today}%" and name="{name}" """
         return self.db_exequite(sql, fetchone=True)[0]
     
     
     def get_ready_category(self, name):
-        today=str(time.ctime())[:10]
+        today=str(datetime.now()+timedelta(hours=5))[:10]
         sql = f""" SELECT COUNT(name) FROM Zakaz WHERE time like "{today}%"and  name="{name}"and not master=0 """
         return self.db_exequite(sql, fetchone=True)[0]
 
@@ -98,8 +98,9 @@ class DBUser:
         self.db_exequite(sql,commit=True)
     ####################################### zakaz #############################
 
-    def add_zakaz(self, name, clent, time, location):
-        sql = f'''INSERT INTO Zakaz VALUES("{name}", {clent}, 0, "{time}", '{location}')'''
+    def add_zakaz(self, name, clent, location):
+        today=str(datetime.now()+timedelta(hours=5))[:-7]
+        sql = f'''INSERT INTO Zakaz VALUES("{name}", {clent}, 0, "{today}", '{location}')'''
         self.db_exequite(sql,commit=True)
 
     def check_zakaz(self, name, clent):
@@ -118,7 +119,7 @@ class DBUser:
         return self.db_exequite(sql,fetchone=True)
 
     def set_master(self, name, clent, master):
-        today=str(time.ctime())[:10]
+        today=str(datetime.now()+timedelta(hours=5))[:10]
         sql = f""" UPDATE Zakaz 
                     SET master={master}
                     WHERE time like "{today}%" AND name="{name}" and clent={clent}"""
