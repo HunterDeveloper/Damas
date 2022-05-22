@@ -9,7 +9,6 @@ def send_location(update, context):
     id=update.message.from_user.id
     if db.check_zakaz(db.get_position(id),id):
         adress=str(update.message.location.longitude)+" "+str(update.message.location.latitude)
-        print(adress)
         db.add_zakaz(db.get_position(id),id,adress)
         context.bot.send_message(id,"Sizning buyurtmangiz qabul qilindi.Tez orada javob olasiz.", reply_markup=ReplyKeyboardRemove(True))
 
@@ -19,8 +18,8 @@ def send_location(update, context):
         j=0
         for i in users:
             try:
-                if db.get_degree(i[0])=='master':
-                    context.bot.send_message(i[0], "ZYangi buyurtma keldi. /startni bosib tekshirib ko'ring.")
+                if db.get_degree(i[0])=='Master':
+                    context.bot.send_message(i[0], "Yangi buyurtma keldi. /startni bosib tekshirib ko'ring.")
                 j+=1
                 if j==30:
                     time.sleep(1)
